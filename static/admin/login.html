@@ -27,8 +27,8 @@
       <form class="login_form">
         <i class="iconfont icon-user"></i>
         <i class="iconfont icon-key"></i>
-        <input type="text" class="input_txt" placeholder="邮箱/手机号" />
-        <input type="password" class="input_pass" placeholder="密码" />
+        <input type="text" name="username" class="input_txt" placeholder="邮箱/手机号" />
+        <input type="password" name="password" class="input_pass" placeholder="密码" />
         <input type="submit" class="input_sub" value="登 录" />
       </form>
     </div>
@@ -60,7 +60,27 @@
   <!-- 引入bootstrap的js文件 -->
   <script src="./js/bootstrap/js/bootstrap.min.js"></script>
   <script>
-
+    //登录
+    $('.login_form').on('submit', function () {
+      var formData = $(this).serialize();
+      $.ajax({
+        type: 'post',
+        url: 'http://localhost:8080/api/v1/admin/user/login',
+        data: formData,
+        success: function (res) {
+          if (res.code == 200) {
+            window.localStorage.setItem('token', res.token);
+            location.href = 'index.html';
+          } else {
+            $('#myModal').modal('show');
+            $('.modal-body').text(res.msg);
+            return;
+          }
+        }
+      })
+      //阻止表单默认提交
+      return false;
+    })
   </script>
 </body>
 
