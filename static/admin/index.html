@@ -96,7 +96,7 @@
     <div class="user_center_link">
       <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
       <img src="images/2.jpg" alt="person">
-      <a href="javascript:;" id="out"><i class="iconfont icon-tuichu"></i> 退出</a>
+      <a href="javascript:;" id="logout"><i class="iconfont icon-tuichu"></i> 退出</a>
     </div>
   </div>
 
@@ -104,7 +104,7 @@
     <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0"
       scrolling="auto"></iframe>
   </div>
-
+  model('show')
   <!-- 模态框 -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -183,12 +183,17 @@
   <!-- 业务逻辑代码 -->
   <script>
     //退出登录
-    $('#out').on('click', function () {
-      if (confirm('您真的确定要退出么?')) {
+    //显示模态框
+    $('#logout').on('click', function () {
+      $('#myModal').modal('show');
+      //给模态框设置点击事件
+      $('#myModal').on('click', '.btn-primary', function () {
+        $('#myModal').modal('hide');
         window.localStorage.removeItem('token');
         location.href = '/admin/login.html';
-      }
+      })
     })
+
   </script>
 </body>
 
