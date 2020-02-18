@@ -17,7 +17,10 @@ $.ajax({
 })
 
 //评论分页功能
+var p = '';
 function changePage(page) {
+    // console.log(page);
+    p = page;
     // 获取评论信息
     $.ajax({
         type: 'get',
@@ -29,10 +32,13 @@ function changePage(page) {
             $('#commentBox').html(html);
             //渲染分页模板
             var ss = template('fenyeTpl', res);
-            $('#fenyeBox').html(ss)
+            $('#fenyeBox').html(ss);
         }
     })
 }
+
+
+
 
 //删除评论
 $('#commentBox').on('click', '.delete', function () {
@@ -93,9 +99,13 @@ function getComment() {
     $.ajax({
         type: 'get',
         url: 'http://localhost:8080/api/v1/admin/comment/search',
+        data: { page: p },
         success: function (res) {
             var html = template('commentTpl', { data: res.data.data });
             $('#commentBox').html(html)
+            //渲染分页模板
+            var ss = template('fenyeTpl', res);
+            $('#fenyeBox').html(ss);
         }
     })
 }
