@@ -28,19 +28,19 @@
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
           <div class="col-sm-4">
-            <input type="text" name="username" class="form-control username" value="李思思">
+            <input type="text" name="username" class="form-control username" id="inputEmail3" value="李思思">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
           <div class="col-sm-4">
-            <input type="text" name="nickname" class="form-control nickname" value="思思">
+            <input type="text" name="nickname" class="form-control nickname" value="思思" id="inputEmail3">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
           <div class="col-sm-4">
-            <input type="text" name="email" class="form-control email" value="lisisi@126.com">
+            <input type="text" name="email" class="form-control email" value="lisisi@126.com" id="inputEmail3">
           </div>
         </div>
 
@@ -60,7 +60,7 @@
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
           <div class="col-sm-4">
-            <input type="password" name="password" class="form-control password" value="12345678">
+            <input type="password" name="password" class="form-control password" value="12345678" id="inputEmail3">
           </div>
         </div>
 
@@ -78,7 +78,7 @@
   <script>
 
     // 文件控件的change事件 
-    $('#exampleIputFile').on('change', function () {
+    $('#exampleInputFile').on('change', function () {
       var file = this.files[0];
       var imgURL = URL.createObjectURL(file);
       // img标签的src属性 
