@@ -3,9 +3,6 @@ $.ajax({
     type: 'get',
     url: 'http://localhost:8080/api/v1/admin/article/query',
     success: function (response) {
-
-
-
         //列表
         var html = template('listTpl',
             response.data
@@ -13,8 +10,6 @@ $.ajax({
         $('#listBox').html(html)
         //分页展示
         var pp = template('pageTpl', response.data)
-
-
         $('#pageBox').html(pp)
     }
 })
@@ -27,7 +22,6 @@ function changePage(page) {
         url: 'http://localhost:8080/api/v1/admin/article/query',
         data: { page: page },
         success: function (response) {
-
             //列表
             var html = template('listTpl',
                 response.data
@@ -54,7 +48,6 @@ $.ajax({
 //给筛选按钮添加submit事件
 $('#formBox').on('submit', function () {
     //获取表单内容
-    //console.log($("#selCategory").val());
     var obj = {};
     if ($('#selCategory').val() != -1) {
         obj.type = $('#selCategory').val()
@@ -81,3 +74,26 @@ $('#formBox').on('submit', function () {
     return false;
 
 })
+
+//删除文章 给文章删除添加事件委托
+$('#listBox').on('click', '.delete', function () {
+    if (confirm('您真的要进行删除操作吗')) {
+        //获取id
+        var id = $(this).attr('data-id')
+        //发送请求 删除文章内容
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:8080/api/v1/admin/article/delete',
+            data: { id: id },
+            success: function (response) {
+                alert(response.msg)
+                location.reload();
+            },
+            error: function () {
+                alert('删除失败')
+            }
+        })
+    }
+})
+
+

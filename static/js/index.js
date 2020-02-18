@@ -71,7 +71,7 @@ $.ajax({
         if (response.code == 200) {
             var guanzhutpl = `
             {{each data}}
-            <li><a href="{{$value.id}}">{{$value.intro}}</a></li>{{/each}}
+            <li><a href="javascript:;{{$value.id}}">{{$value.intro}}</a></li>{{/each}}
             `
             var html = template.render(guanzhutpl, response);
             $('#guanzhubox').html(html)
@@ -86,11 +86,31 @@ $.ajax({
         if (response.code == 200) {
             var paihangtpl = `
 {{each data}}
-<li><span class="{{$index+1==1?'first':$index+1==2?'second':$index+1==3?'third':''}}">{{$index+1}}</span><a href="{{$value.id}}">{{$value.title}}</a></li>{{/each}}
+<li><span class="{{$index+1==1?'first':$index+1==2?'second':$index+1==3?'third':''}}">{{$index+1}}</span><a href="javascript:;{{$value.id}}">{{$value.title}}</a></li>{{/each}}
             `
             var html = template.render(paihangtpl, response);
             $('#paihangbox').html(html)
 
+        }
+    }
+})
+
+//获取图片
+$.ajax({
+    url: 'http://localhost:8080/api/v1/index/hotpic',
+    success: function (response) {
+        if (response.code == 200) {
+            var tupiantpl = `
+            {{each data}}
+            <li class="{{$index==0?'first':''}}">
+            <a href="javascript:;{{$value.id}}"><img src="{{$value.cover}}" alt=""></a>
+            <p>{{$value.title}}</p>
+          </li>{{/each}}
+            `
+            var html = template.render(tupiantpl, response);
+            $('#tupianbox').html(html);
+            
+            
         }
     }
 })
