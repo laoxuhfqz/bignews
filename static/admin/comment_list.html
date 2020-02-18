@@ -65,6 +65,7 @@
     })
   </script>
 
+
   <!-- 评论列表模板 -->
   <script type="text/html" id="commentTpl">
     {{each data}}
@@ -78,10 +79,12 @@
         {{if $value.state == '待审核' || $value.state == '已通过'}}
          <a href="javascript:;" class="btn btn-warning btn-xs editN" data-id="{{$value.id}}">拒绝</a>
         {{/if}} 
-        {{if $value.state == '已拒绝'}}
+        {{if $value.state == '已拒绝' || $value.state == '待审核' }}
          <a href="javascript:;" class="btn btn-warning btn-xs editY" data-id="{{$value.id}}">同意</a>
         {{/if}}
+        {{if $value.state != '待审核'}}
         <a href="javascript:;" class="btn btn-danger btn-xs delete" data-id="{{$value.id}}">删除</a>
+        {{/if}}
       </td>
     </tr>
     {{/each}}
@@ -89,63 +92,40 @@
 
   <!-- 分页模板 -->
   <script type="text/html" id="fenyeTpl">
-    <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
-    <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
-    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-    <li class="page-item"><a href="#" class="page-link">2</a></li>
-    <li class="page-item"><a href="#" class="page-link">3</a></li>
-    <li class="page-item"><a href="#" class="page-link">4</a></li>
-    <li class="page-item"><a href="#" class="page-link">5</a></li>
-    <li class="page-item"><a href="#" class="page-link">6</a></li>
-    <li class="page-item"><a href="#" class="page-link">7</a></li>
-    <li class="page-item next"><a href="#" class="page-link">下一页</a></li>
-    <li class="page-item last"><a href="#" class="page-link">尾页</a></li>
+    <li class="page-item first {{data.page == 1 ? 'disabled' : ''}}"><a href="javascript:;" class="page-link" onclick="changePage(1)">首页</a></li>
+    <li class="page-item prev {{data.page == 1 ? 'disabled' : ''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page - 1}})">上一页</a></li>
+    {{if data.page <= 4}}
+    <li class="page-item {{data.page == 1 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(1)">1</a></li>
+    <li class="page-item {{data.page == 2 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(2)">2</a></li>
+    <li class="page-item {{data.page == 3 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(3)"> 3</a></li>
+    <li class="page-item {{data.page == 4 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(4)">4</a></li>
+    <li class="page-item {{data.page == 5 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(5)">5</a></li>
+    <li class="page-item {{data.page == 6 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(6)">6</a></li>
+    <li class="page-item {{data.page == 7 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage(7)">7</a></li>
+    {{else if data.page >= data.pages - 3}}
+    <li class="page-item {{data.page == data.pages-6 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-6}})">{{data.pages-6}}</a></li>
+    <li class="page-item {{data.page == data.pages-5 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-5}})">{{data.pages-5}}</a></li>
+    <li class="page-item {{data.page == data.pages-4 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-4}})">{{data.pages-4}}</a></li>
+    <li class="page-item {{data.page == data.pages-3 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-3}})">{{data.pages-3}}</a></li>
+    <li class="page-item {{data.page == data.pages-2 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-2}})">{{data.page-2}}</a></li>
+    <li class="page-item {{data.page == data.pages-1 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-1}})">{{data.page-1}}</a></li>
+    <li class="page-item {{data.page == data.pages ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages-3}})">{{data.page-3}}</a></li>
+    {{else}}
+    <li class="page-item {{data.page == data.page-3 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page-3}})">{{data.page-3}}</a></li>
+    <li class="page-item {{data.page == data.page-2 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page-2}})">{{data.page-2}}</a></li>
+    <li class="page-item {{data.page == data.page-1 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page-1}})">{{data.page-1}}</a></li>
+    <li class="page-item {{data.page == data.page ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page}})">{{data.page}}</a></li>
+    <li class="page-item {{data.page == data.page+1 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page+1}})">{{data.page+1}}</a></li>
+    <li class="page-item {{data.page == data.page+2 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page+2}})">{{data.page+2}}</a></li>
+    <li class="page-item {{data.page == data.page+3 ? 'active' :''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page+3}})">{{data.page+3}}</a></li>
+    {{/if}}
+    <li class="page-item next {{data.page == data.pages ? 'disabled' : ''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.page + 1}})">下一页</a></li>
+    <li class="page-item last {{data.page == data.pages ? 'disabled' : ''}}"><a href="javascript:;" class="page-link" onclick="changePage({{data.pages}})">尾页</a></li>
 
   </script>
 
   <!-- 业务逻辑代码 -->
-  <script>
-    // 发送请求 获取评论信息
-    $.ajax({
-      type: 'get',
-      url: 'http://localhost:8080/api/v1/admin/comment/search',
-      success: function (res) {
-        console.log(res);
-        // var data = res.data.data;
-        // console.log(data);
-        //渲染页面
-        var html = template('commentTpl', { data: res.data.data });
-        // console.log(html);
-        $('#commentBox').html(html)
-      }
-    })
-
-    //删除评论
-    $('#commentBox').on('click', '.delete', function () {
-      // alert('OK')
-      //获取要删除的评论的id
-      var id = $(this).attr('data-id')
-      console.log(id);
-
-      //发送请求删除数据
-      $.ajax({
-        type: 'post',
-        url: 'http://localhost:8080/api/v1/admin/comment/delete',
-        data: { id: id },
-        success: function () {
-          // 发送请求 获取评论信息
-          $.ajax({
-            type: 'get',
-            url: 'http://localhost:8080/api/v1/admin/comment/search',
-            success: function (res) {
-              var html = template('commentTpl', { data: res.data.data });
-              $('#commentBox').html(html)
-            }
-          })
-        }
-      })
-    })
-  </script>
+  <script src="js/comment-list.js"></script>
 </body>
 
 </html>
