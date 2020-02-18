@@ -46,9 +46,7 @@ $('#modifybox').on('click', '#model_modify', function () {
         type: 'post',
         data: data,
         success: function (result) {
-            if (result.code == 200) {
-                location.reload()
-            }
+            location.reload()
         }
     })
 })
@@ -60,12 +58,24 @@ $('#addModal').on('click', '#shutoff', function () {
 
 $('#categorybox').on('click', '.delete', function () {
     var id = $(this).siblings('.edit').data('id');
-    $.ajax({
-        url: 'http://localhost:8080/api/v1/admin/category/delete',
-        type: 'post',
-        data: {id},
-        success: function (response) {
-            location.reload();
-        }
-    })
+    if (confirm('您确定删除这个分类吗')) {
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/admin/category/delete',
+            type: 'post',
+            data: {id},
+            success: function (response) {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8080/api/v1/admin/category/list',
+                    success: function (response) {
+                        if (response.code == 200) {
+                            var html = template('categorytpl', response);
+                            $('#categorybox').html(html);
+                
+                        }
+                    }
+                })
+            }
+        })
+    }
 })
