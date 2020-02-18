@@ -57,7 +57,7 @@
   <div class="main_con clearfix">
     <div class="left_con">
       <ul class="focus_list" id="tupianbox">
-        <li class="first">
+        <!-- <li class="first">
           <a href="#"><img src="images/pic01.jpg" alt=""></a>
           <p>图片说明</p>
         </li>
@@ -76,7 +76,7 @@
         <li>
           <a href="#"><img src="images/pic06.jpg" alt=""></a>
           <p>图片说明</p>
-        </li>
+        </li> -->
       </ul>
 
       <div class="common_title">
@@ -148,8 +148,8 @@
   <script type="text/html" id="informationtpl">
     {{each data}}
     <div class="common_news_list">
-      <a href="javascript:;{{$value.id}}" class="list_pic"><img src="{{$value.cover}}" alt=""></a>
-      <h4><a href="#">{{$value.intro}}</a></h4>
+      <a href="article.html?id{{$value.id}}" class="list_pic"><img src="{{$value.cover}}" alt=""></a>
+      <h4><a href="article.html?id={{$value.id}}">{{$value.intro}}</a></h4>
       <p>{{$value.content}}</p>
       <div class="new_info">
         <span>标签：{{$value.category}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;阅读({{$value.read}}
@@ -159,9 +159,7 @@
     </div>
     {{/each}}
   </script>
-  <script type="text/html" id="commentstpl">
-    
-  </script>
+  
   <script src="./js/index.js" ></script>
 </body>
 
