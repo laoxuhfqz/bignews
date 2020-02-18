@@ -199,6 +199,7 @@ module.exports = {
         });
       } else {
         const { filename: cover } = req.file;
+        console.log(cover);
 
         const updateRes = await Article.update(
           {
