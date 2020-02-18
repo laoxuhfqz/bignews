@@ -18,7 +18,7 @@ $('#exampleInputFile').on('change', function () {
     var file = this.files[0]
     var imgURL = URL.createObjectURL(file)
     $('#preview').prop('src', imgURL);
-
+    // $('#example1').val(imgURL)
 })
 
 //给发布按钮添加点击事件
