@@ -36,6 +36,7 @@ $('#publish').on('click', function () {
     formData.append('categoryId', $('#article_category').find('option:selected').attr('data-id'));
     formData.append('content', tinyMCE.activeEditor.getContent().replace(/<[^<>]+>/g, ''));
     formData.append('state', $("#publish").val());
+
     $.ajax({
         type: 'post',
         url: 'http://localhost:8080/api/v1/admin/article/publish',
