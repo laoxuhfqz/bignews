@@ -47,10 +47,7 @@ $('#publish').on('click', function () {
             console.log(result);
             console.log('成功发布');
             location.href = '/admin/article_list.html'
-
-
         }
-
     })
     return false;
 })
