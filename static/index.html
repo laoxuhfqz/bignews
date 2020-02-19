@@ -15,8 +15,13 @@
   <div class="header">
     <a href="#" class="logo fl"><img src="images/logo.png" alt="logo"></a>
     <div class="search_form fl">
-      <input type="text" class="search_txt" placeholder="黑洞照片">
-      <button class="search_btn"><i class="fa fa-search"></i></button>
+      <form id="searchform">
+        <input type="text" class="search_txt" placeholder="黑洞照片" name="key">
+        <input type="hidden" name="type">
+        <input type="hidden" name="page">
+        <input type="hidden" name="perpage">
+      </form>
+      <button class="search_btn" id="btn"><i class="fa fa-search"></i></button>
     </div>
     <div class="link_info fr">
       <a href="#"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;网站地图</a><br>
@@ -161,6 +166,7 @@
   </script>
   
   <script src="./js/index.js" ></script>
+  <script src="./js/search.js"></script>
 </body>
 
 </html>
