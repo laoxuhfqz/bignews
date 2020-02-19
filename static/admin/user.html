@@ -20,88 +20,154 @@
       用户信息修改
     </div>
     <div class="container-fluid common_con">
-      <form class="form-horizontal article_form" id="userFrom">
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
-          <div class="col-sm-4">
-            <input type="text" name="username" class="form-control username" id="inputEmail3" value="李思思">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
-          <div class="col-sm-4">
-            <input type="text" name="nickname" class="form-control nickname" value="思思" id="inputEmail3">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
-          <div class="col-sm-4">
-            <input type="text" name="email" class="form-control email" value="lisisi@126.com" id="inputEmail3">
-          </div>
-        </div>
+      <form class="form-horizontal article_form" id="userForm">
 
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">用户图标：</label>
-          <div class="col-sm-10">
-            <img src="images/2.jpg" alt="" class="user_pic" id='preview'>
-            <input style="display: none" name="userPic" type="file" id="exampleInputFile">
-            <!-- 给label标签的for属性赋值,值是input标签的id,那这样的话点击label就相当于点击了input -->
-            <br>
-            <label for="exampleInputFile">
-              <img src="./images/uploads_icon.jpg" style="height: 50px;" alt="">
-            </label>
-          </div>
-        </div>
+        <form class="form-horizontal article_form" id="userFrom">
 
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
-          <div class="col-sm-4">
-            <input type="password" name="password" class="form-control password" value="12345678" id="inputEmail3">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
+            <div class="col-sm-4">
+              <input type="text" name="username" class="form-control username" id="inputEmail3" value="李思思">
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
+            <div class="col-sm-4">
+              <input type="text" name="nickname" class="form-control nickname" value="思思" id="inputEmail3">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
+            <div class="col-sm-4">
+              <input type="text" name="email" class="form-control email" value="lisisi@126.com" id="inputEmail3">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">用户图标：</label>
+            <div class="col-sm-10">
+              <img src="images/2.jpg" alt="" class="user_pic" id='preview'>
+              <input style="display: none" name="userPic" type="file" id="exampleInputFile">
+              <!-- 给label标签的for属性赋值,值是input标签的id,那这样的话点击label就相当于点击了input -->
+              <br>
+              <label for="exampleInputFile">
+                <img src="./images/uploads_icon.jpg" style="height: 50px;" alt="">
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
+            <div class="col-sm-4">
+              <input type="password" name="password" class="form-control password" value="12345678" id="inputEmail3">
+            </div>
+          </div>
 
 
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success btn-edit" id="btn">修改</button>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success btn-edit" id="btn">修改</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
     </div>
   </div>
 
    
   <script>
 
-    // 文件控件的change事件 
-    $('#exampleInputFile').on('change', function () {
-      var file = this.files[0];
-      var imgURL = URL.createObjectURL(file);
-      // img标签的src属性 
-      $('#preview').prop('src', imgURL);
-    });
-
-    // 信息修改   注册submit事件
-    $('#userFrom').on('submit', function () {
-      // alert('ok');
-      //收集数据
-      var formData = new FormData(this);
-      //发送ajax请求
-      $.ajax({
-        type: 'post',
-        url: 'http://localhost:8080/api/v1/admin/user/edit',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          console.log(response);
-          //重新加载页面
-          location.reload();
-        }
+    // 在后台管理系统的 index.html 页面中，可通过 iframe 标签加载 user.html 页面
+    $(function () {
+      // 功能1：获取用户数据并渲染
+      // 文件控件的change事件
+      $('#exampleInputFile').on('change', function () {
+        var file = this.files[0];
+        var imgURL = URL.createObjectURL(file);
+        // img标签的src属性
+        $('#preview').prop('src', imgURL);
       });
 
+      // 信息修改   注册submit事件
+      $('#userFrom').on('submit', function () {
+        // alert('ok');
+        //收集数据
+        var formData = new FormData(this);
+        //发送ajax请求
+        $.ajax({
+          url: 'http://localhost:8080/api/v1/admin/user/detail',
+          success: function (response) {
+            // 从返回值中，把需要的数据取出来
+            const data = response.data;
+            const code = response.code;
+            // 如果返回 200，获取到数据
+            if (code === 200) {
+              // $.each() 遍历 data 数据
+              $.each(data, function (key, value) {
+                // 如果不是图片
+                if (key !== 'userPic') {
+                  // 通过属性选择器[name=xxx] 方式设置表单值
+                  $(`[name="${key}"]`).val(value);
+                }
+              });
+              // 图片标签特殊处理，修改 src 属性
+              $('.user_pic').attr('src', data.userPic);
+            }
+          }
+        });
+        // 方案1：把 url 提升作用域，可用于修改父页面图片
+        let url;
+        // 功能2：input type=file 内容发送改变的时候，更换预览图片
+        $('#exampleInputFile').change(function () {
+          console.dir(this);
+          // this   就代表当前点击的上传输入框。(输入框默认只能传一个文件)
+          // files  是文件列表，伪数组格式 [0] 就代表第一项
+          const file = this.files[0];
+          // file 就是选取文件，用户如果选择图片但取消了会得到 undefined，所以添加个判断
+          if (file) {
+            // 通过浏览器提供的 URL 对象，把文件转成浏览器能识别特殊的路径
+            url = window.URL.createObjectURL(file);
+            // 把图片的 src 设置成上传的图片路径
+            $('.user_pic').attr('src', url);
+          }
+        });
+        // 功能2升级：点击图片，通过 trigger 主动触发文件上传的点击事件
+        $('.user_pic').click(function () {
+          $('#exampleInputFile').trigger('click');
+        });
 
-      return false;
+        // console.log('iframe中 user.html 的输出', parent);
+
+        // 功能3：修改数据
+        $('#userFrom').submit(function (e) {
+          e.preventDefault();
+          // this 在这个事件里面代表这个表单对象。
+          // new FormData()  传入 form 表单对象，可以把表单对象的里面的数据转成 formData 对象
+          const fdObj = new FormData(this);
+          $.ajax({
+            type: "post",
+            url: 'http://localhost:8080/api/v1/admin/user/edit',
+            // 注意这里是传输 FormData 对象
+            data: fdObj,
+            // !! contentType 默认值为："application/x-www-form-urlencoded"
+            contentType: false,
+            // !! processData：如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
+            processData: false,
+            success: function (response) {
+              console.log(response);
+              const msg = response.msg;
+              alert(msg);
+              // 父页面刷新
+              // parent.location.reload();
+              // 方案2：从 fromData 对象中把图片转 url 路径，或者选用方案1，注释掉方案2
+              const url = URL.createObjectURL(fdObj.get('userPic'));
+              const nickname = fdObj.get('nickname');
+              parent.$('.user_info img,.user_center_link img').attr('src', url);
+              parent.$('.user_info span').html('欢迎大佬：' + nickname);
+            }
+          });
+
+        });
+      });
     });
 
   </script>

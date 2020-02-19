@@ -13,33 +13,8 @@
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="row spannel_list">
-      <div class="col-sm-3 col-xs-6">
-        <div class="spannel">
-          <em>10015</em><span>篇</span>
-          <b>总文章数</b>
-        </div>
-      </div>
-      <div class="col-sm-3 col-xs-6">
-        <div class="spannel scolor01">
-          <em>123</em><span>篇</span>
-          <b>日新增文章数</b>
-        </div>
-      </div>
-      <div class="col-sm-3 col-xs-6">
-        <div class="spannel scolor02">
-          <em>35</em><span>条</span>
-          <b>评论总数</b>
-        </div>
-      </div>
-      <div class="col-sm-3 col-xs-6">
-        <div class="spannel scolor03">
-          <em>123</em><span>条</span>
-          <b>日新增评论数</b>
-        </div>
-      </div>
-    </div>
+  <div class="container-fluid" id="toubuBox">
+
   </div>
 
   <div class="container-fluid">
@@ -59,6 +34,50 @@
 
   <script src="js/jquery-1.12.4.min.js"></script>
   <script type="text/javascript" src="js/echarts.min.js"></script>
+  <script src="js/template-web.js"></script>
+  <!-- 头部模板 -->
+  <script type="text/html" id="toubuTPl">
+    <div class="row spannel_list">
+      <div class="col-sm-3 col-xs-6">
+        <div class="spannel">
+          <em>{{totalArticle}}</em><span>篇</span>
+          <b>总文章数</b>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div class="spannel scolor01">
+          <em>{{dayArticle}}</em><span>篇</span>
+          <b>日新增文章数</b>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div class="spannel scolor02">
+          <em>{{totalComment}}</em><span>条</span>
+          <b>评论总数</b>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div class="spannel scolor03">
+          <em>{{dayComment}}</em><span>条</span>
+          <b>日新增评论数</b>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script>
+    //获取信息
+    $.ajax({
+      type: 'get',
+      url: 'http://localhost:8080/api/v1/admin/data/info',
+      success: function (res) {
+        console.log(res);
+        var html = template('toubuTPl', res);
+        $('#toubuBox').html(html);
+
+      }
+    })
+
+  </script>
   <script>
     var oChart = echarts.init(document.getElementById('curve_show'));
     //页面一进来就发送ajax请求,获取真实的月新增文章数
@@ -69,6 +88,7 @@
         if (backData.code == 200) {
           let aCount = [];
           let aDate = [];
+          console.log(backData);
 
           for (var i = 0; i < backData.date.length; i++) {
             aCount.push(backData.date[i].count);
