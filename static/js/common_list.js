@@ -74,7 +74,6 @@ $.ajax({
     type: 'get',
     url: 'http://localhost:8080/api/v1/index/search',
     success: function (response) {
-
         var html = template('wenzhang', {
             data: response.data.data
         });
@@ -89,8 +88,6 @@ $.ajax({
     type: 'get',
     url: 'http://localhost:8080/api/v1/index/category',
     success: function (response) {
-        console.log(response);
-
         var navTpl = `
         <li class="up"></li>
         {{each data}}

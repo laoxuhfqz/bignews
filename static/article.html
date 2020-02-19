@@ -80,7 +80,6 @@
           上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
           下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
         </div> -->
-
       </div>
 
       <form action="" class="comment_form" id="commentForm">
@@ -119,7 +118,7 @@
       <div class="common_wrap">
         <h3><i class="fa fa-commenting-o"></i> 最新评论</h3>
         <ul class="content_list comment_list" id="commentsbox">
-          <li>
+          <!-- <li>
             <span>山</span>
             <b><em>山治</em> 9个月前(08-14)说:</b>
             <strong>挺会玩的</strong>
@@ -148,7 +147,7 @@
             <span>乔</span>
             <b><em>乔峰</em> 9个月前(08-14)说:</b>
             <strong>挺会玩的</strong>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="common_wrap">
@@ -198,8 +197,12 @@
      
       
       <div class="article_links">
+        {{if prev}}
         上一篇： <a href="article.html?id={{prev.id}}">{{prev.title}}</a><br>
+        {{/if}}
+        {{if next}}
         下一篇： <a href="article.html?id={{next.id}}">{{next.title}}</a>
+        {{/if}}
       </div>
   </script>
 
