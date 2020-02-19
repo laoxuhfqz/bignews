@@ -5,10 +5,10 @@ $.ajax({
         if (response.code == 200) {
             var arr = response.data.slice(0, 6);
             var categorytpl = `
-            {{each}}<li><a href="article.html?id={{$value.id}}" data-id="{{$value.id}}">{{$value.name}}</a></li>{{/each}}
+            {{each}}<li><a href="list.html?id={{$value.id}}" data-id="{{$value.id}}">{{$value.name}}</a></li>{{/each}}
             `;
             var categortpl = `
-            {{each}}<li><a href="article.html?id={{$value.id}}" data-id="{{$value.id}}">{{$value.name}}</a></li>{{/each}}
+            {{each}}<li><a href="list.html?id={{$value.id}}" data-id="{{$value.id}}">{{$value.name}}</a></li>{{/each}}
             `
             var newarr1 = [];
             var newarr2 = []
@@ -35,7 +35,7 @@ $.ajax({
         if (response.code == 200) {
             var html = template('informationtpl', response);
             $('#informationbox').html(html)
-           
+
         }
     }
 })
@@ -109,9 +109,11 @@ $.ajax({
             `
             var html = template.render(tupiantpl, response);
             $('#tupianbox').html(html);
-            
-            
+
+
         }
     }
 })
+
+
 

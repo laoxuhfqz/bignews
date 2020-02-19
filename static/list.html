@@ -47,10 +47,6 @@
   <div class="main_con clearfix">
     <div class="left_con setfr"  id="listBox">
 
-      <div class="list_title">
-        <h3>科 技</h3>
-      </div>
-
       <div class="common_news_list">
 
       </div>
@@ -105,26 +101,25 @@
     <p>电话：0755-****888 粤ICP备*******8号</p>
   </div>
   <script src="./js/template-web.js"></script>
-  <script src="./js/common_list.js"></script>
-  <script type="text/html" id="wenzhang">
+  <script type="text/html" id="llltpl">
     {{each data}}
     <div class="list_title">
-      <h3>{{$value.category}}</h3>
-    </div>
-    <div class="common_news_list">
-      <a href="article.html?id={{$value.id}}" class="list_pic"><img src="{{$value.cover}}" alt=""></a>
-      <h4><a href="article.html?id={{$value.id}}">{{$value.title}}</a></h4>
-      <p>{{$value.content}}
-      </p>
-      <div class="new_info">
-        <span>标签：{{$value.category}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;阅读(
-          {{$value.read}}
-          )&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting"></i>&nbsp;评论( {{$value.comments}})</span>
-        <b>发布于 {{$value.date}}</b>
+        <h3>{{$value.category}}</h3>
       </div>
-    </div>
-    {{/each}}
+      <div class="common_news_list">
+        <a href="article.html?id={{$value.id}}" class="list_pic"><img src="{{$value.cover}}" alt=""></a>
+        <h4><a href="article.html?id={{$value.id}}">{{$value.title}}</a></h4>
+        <p>{{$value.content}}</p>
+        <div class="new_info">
+          <span>标签：{{$value.category}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;阅读( {{$value.read}}
+            )&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting"></i>&nbsp;评论( {{$value.comments}})</span>
+          <b>发布于 {{$value.date}}</b>
+        </div>
+      </div>
+      {{/each}}
   </script>
+  <script src="./js/common_list.js"></script>
+
   <script type="text/html" id="informationtpl">
     {{each data}}
     <div class="common_news_list">
