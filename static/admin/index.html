@@ -73,7 +73,7 @@
 
       <div class="level01">
         <a href="comment_list.html" target="main_frame">
-          <i class="iconfont icon-comment"></i>
+          <i class="iconfont icon-comment" type="submit"></i>
           <span>评论管理</span>
         </a>
       </div>
@@ -89,9 +89,10 @@
 
   <div class="header_bar">
     <form class="search_form">
-      <input type="text" placeholder="请输入搜索内容">
-      <i class="iconfont icon-search"></i>
-    </form>
+
+		<input type="text" placeholder="请输入搜索内容" id="search">
+      <i class="iconfont icon-search" id="icon-search"></i>
+</form>
 
     <div class="user_center_link">
       <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
@@ -193,7 +194,18 @@
       })
     })
 
-  </script>
+ //搜索功能
+    $("#icon-search").on("click", function () {
+      var search = $("#search").val();
+      if (search.trim() == "") {
+        alert("请输入搜索内容！");
+        return false;
+      }
+      $('iframe').prop('src', 'article_list.html?key=' + search);
+
+      // $("#search").val("");
+    });
+ </script>
 </body>
 
 </html>

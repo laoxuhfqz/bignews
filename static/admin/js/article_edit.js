@@ -19,6 +19,8 @@ $.ajax({
                     $("#modifyBox").html(html);
                 }
             })
+
+
         }
 
     }
@@ -47,7 +49,7 @@ $('#modifyBox').on('submit', '#modifyForm', function () {
     formData.append("date", $("#dateinput").val());
     formData.append("content", $("#rich_content").val());
     formData.append("cover", $("#exampleInputFile")[0].files[0]);
-    console.log($("#exampleInputFile")[0].files[0]);
+
 
     $.ajax({
         type: 'post',

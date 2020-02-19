@@ -1,7 +1,18 @@
+//获取搜索框输入的搜索条件   从index跳转过来
+var key = getUrlParams("key");
+//判断是否为 -1 为-1就代表不是搜索文章
+if (key == '-1') {
+    key = null;
+} else {
+    //否则就是搜索文章  url参数被编码  需要解码获取真实参数
+    //将所有文章查询接口都加上  key 条件
+    key = decodeURI(key);
+}
 //获取文章列表数据
 $.ajax({
     type: 'get',
     url: 'http://localhost:8080/api/v1/admin/article/query',
+    data: { key: key },
     success: function (response) {
         //列表
         var html = template('listTpl',
@@ -9,7 +20,8 @@ $.ajax({
         );
         $('#listBox').html(html)
         //分页展示
-        var pp = template('pageTpl', response.data)
+        var pp = template('pageTpl', { data: response.data })
+
         $('#pageBox').html(pp)
     }
 })
@@ -20,7 +32,7 @@ function changePage(page) {
     $.ajax({
         type: 'get',
         url: 'http://localhost:8080/api/v1/admin/article/query',
-        data: { page: page },
+        data: { page: page, key: key },
         success: function (response) {
             //列表
             var html = template('listTpl',
@@ -28,7 +40,7 @@ function changePage(page) {
             );
             $('#listBox').html(html)
             //分页展示
-            var pp = template('pageTpl', response.data)
+            var pp = template('pageTpl', { data: response.data })
             $('#pageBox').html(pp)
         }
     })
@@ -55,6 +67,10 @@ $('#formBox').on('submit', function () {
     if ($('#selStatus').val() != -1) {
         obj.state = $('#selStatus').val()
     }
+    if (key != '-1') {
+        obj.key = key;
+    }
+
 
     $.ajax({
         type: 'get',
@@ -67,7 +83,7 @@ $('#formBox').on('submit', function () {
             );
             $('#listBox').html(html)
             //分页展示
-            var pp = template('pageTpl', response.data)
+            var pp = template('pageTpl', { data: response.data })
             $('#pageBox').html(pp)
         }
     })
@@ -97,3 +113,19 @@ $('#listBox').on('click', '.delete', function () {
 })
 
 
+
+
+
+// 封装一个函数，用于从浏览器的地址栏中获取指定的参数
+function getUrlParams(name) {
+    var paramsAry = location.search.substr(1).split('&');
+    // 循环数据
+    for (var i = 0; i < paramsAry.length; i++) {
+        var tmp = paramsAry[i].split('=');
+        if (tmp[0] == name) {
+            return tmp[1];
+        }
+    }
+    // 参数不存在，则返回-1
+    return -1;
+}
