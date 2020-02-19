@@ -13,7 +13,7 @@ $.ajax({
             var newarr1 = [];
             var newarr2 = []
             for (var i = 0; i < arr.length; i++) {
-                if (i < arr.length - 2) {
+                if (i <= arr.length - 3) {
                     newarr1.push(arr[i])
                 } else {
                     newarr2.push(arr[i])
