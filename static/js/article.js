@@ -16,8 +16,7 @@ $.ajax({
     data: {id},
     success: function (response) {
         var html = template('articletpl', response.data);
-        $('#articlebox').html(html)
-           
+        $('#articlebox').html(html)    
     }
 })
 

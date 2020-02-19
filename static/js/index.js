@@ -19,7 +19,6 @@ $.ajax({
                     newarr2.push(arr[i])
                 }
             }
-
             var html1 = template.render(categorytpl, newarr1);
             var html2 = template.render(categortpl, newarr2);
             $('#downcategory1').html(html1);
@@ -36,6 +35,7 @@ $.ajax({
         if (response.code == 200) {
             var html = template('informationtpl', response);
             $('#informationbox').html(html)
+           
         }
     }
 })
