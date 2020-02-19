@@ -115,5 +115,12 @@ $.ajax({
     }
 })
 
+$('#btn').on('click', function () {
+    var key = $('#search').val();
+    location.href = 'search.html?key=' + key;
+
+       
+})
+
 
 
