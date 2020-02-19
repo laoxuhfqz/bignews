@@ -96,39 +96,13 @@
           <input type="submit" name="" value="评 论" class="comment_sub"></div>
       </form>
 
-      <div class="comment_count">
-        4条评论
+      <div class="comment_count" id="commentCount">
+
       </div>
 
-      <div class="comment_list_con">
-        <div class="comment_detail_list">
-          <div class="person_pic fl">乔</div>
-          <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-          <div class="comment_text fl">
-            遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-          </div>
-        </div>
-        <div class="comment_detail_list">
-          <div class="person_pic fl">段</div>
-          <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-          <div class="comment_text fl">
-            遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-          </div>
-        </div>
-        <div class="comment_detail_list">
-          <div class="person_pic fl">虚</div>
-          <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-          <div class="comment_text fl">
-            遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-          </div>
-        </div>
-        <div class="comment_detail_list">
-          <div class="person_pic fl">王</div>
-          <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-          <div class="comment_text fl">
-            遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-          </div>
-        </div>
+      <div class="comment_list_con" id="listBox">
+
+
       </div>
     </div>
     <div class="right_con setfl">
@@ -203,6 +177,19 @@
     下一篇： <a href="article.html?id={{prev.id}}">{{next.title}}</a>
       </div>
      
+  </script>
+
+  <!-- list模板 -->
+  <script type='text/html' id='listTpl'>
+    {{each data}}
+    <div class="comment_detail_list">
+      <div class="person_pic fl">{{$value.author.substr(0,1)}}</div>
+      <div class="name_time fl"><b>{{$value.author}}</b><span>{{$imports.getTime($value.date,$value.time)}}前</span></div>
+      <div class="comment_text fl">
+        {{$value.content}}
+      </div>
+    </div>
+    {{/each}}
   </script>
 
   <!-- 文章页面的 js 代码  -->
