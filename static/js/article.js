@@ -22,6 +22,8 @@ $.ajax({
     }
 })
 
+
+
 // 评论功能
 $('#commentForm').on('submit', function () {
     // 获取表单信息
@@ -50,33 +52,12 @@ $('#commentForm').on('submit', function () {
 
 
 
-
-
-
-//获取评论
-$.ajax({
-    url: 'http://localhost:8080/api/v1/index/latest_comment',
-    success: function (response) {
-        if (response.code == 200) {
-            var commentstpl = `
-            {{each data}}
-            <li>
-            <span>{{$value.author.substring(0,1)}}</span>
-            <b><em>{{$value.author}}</em>{{$imports.formatedate($value.date)}}说:</b>
-            <strong>{{$value.intro}}</strong>
-          </li>{{/each}}
-            `
-            var html = template.render(commentstpl, response);
-            $('#commentsbox').html(html)
-
-        }
-    }
-})
-
 function formatedate(date) {
     var date = new Date(date)
     return date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
 }
+
+
 
 //获取焦点
 $.ajax({
@@ -107,6 +88,25 @@ $.ajax({
             $('#paihangbox').html(html)
 
         }
+    }
+})
+
+// 获取评论数据
+$.ajax({
+    url: "http://localhost:8080/api/v1/index/get_comment",
+    type: 'get',
+    data: {
+        articleId: id
+    },
+    success: function (res) {
+        console.log(res);
+        var length = res.data.length
+        // 数据模板拼接
+        var html = template('listTpl', {
+            data: res.data
+        })
+        $('#listBox').html(html)
+        $('#commentCount').html(length + '条评论')
     }
 })
 

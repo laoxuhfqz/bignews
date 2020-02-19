@@ -28,27 +28,27 @@
     <div class="menu">
       <div class="menu_collapse fl">
         <a href="javascript:;" class="level_one"><i class="fa fa-list-ul"></i>全部分类</a>
-        <ul class="level_two">
+        <ul class="level_two" id="downcategory1">
           <li class="up"></li>
-          <li><a href="#">最 新</a></li>
+          <!-- <li><a href="#">最 新</a></li>
           <li><a href="#">科 技</a></li>
           <li><a href="#">股 市</a></li>
           <li><a href="#">商 品</a></li>
           <li><a href="#">外 汇</a></li>
-          <li><a href="#">公 司</a></li>
+          <li><a href="#">公 司</a></li> -->
         </ul>
       </div>
-      <ul class="left_menu fl">
-        <li><a href="#">最 新</a></li>
+      <ul class="left_menu fl" id="downcategory2">
+        <!-- <li><a href="#">最 新</a></li>
         <li><a href="#">科 技</a></li>
         <li><a href="#">股 市</a></li>
         <li><a href="#">商 品</a></li>
         <li><a href="#">外 汇</a></li>
-        <li><a href="#">公 司</a></li>
+        <li><a href="#">公 司</a></li> -->
       </ul>
-      <ul class="right_menu fr">
-        <li><a href="#">科技专题</a></li>
-        <li><a href="#">财经专题</a></li>
+      <ul class="right_menu fr" id="downcategory3">
+        <!-- <li><a href="#">科技专题</a></li>
+        <li><a href="#">财经专题</a></li> -->
       </ul>
     </div>
   </div>
@@ -97,18 +97,16 @@
       </form>
 
       <div class="comment_count" id="commentCount">
-
+        4条评论
       </div>
 
       <div class="comment_list_con" id="listBox">
-
-
       </div>
     </div>
     <div class="right_con setfl">
       <div class="common_wrap">
         <h3><i class="fa fa-bar-chart"></i> 一周热门排行</h3>
-        <ul class="content_list hotList" id="paihangBox">
+        <ul class="content_list" id="paihangbox">
           <!-- <li><span class="first">1</span><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
           <li><span class="second">2</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
           <li><span class="third">3</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
@@ -121,8 +119,36 @@
       <div class="common_wrap">
         <h3><i class="fa fa-commenting-o"></i> 最新评论</h3>
         <ul class="content_list comment_list" id="commentsbox">
-
-
+          <li>
+            <span>山</span>
+            <b><em>山治</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>丽</span>
+            <b><em>丽丽</em> 9个月前(08-14)说:9个月前(08-14)说:9个月前(08-14)说:</b>
+            <strong>挺会玩的挺会玩的挺会玩的挺会玩的</strong>
+          </li>
+          <li>
+            <span>R</span>
+            <b><em>Rechael</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>J</span>
+            <b><em>John</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>段</span>
+            <b><em>段正淳</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>乔</span>
+            <b><em>乔峰</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
         </ul>
       </div>
       <div class="common_wrap">
@@ -157,10 +183,9 @@
 
   <script src="./js/jquery-1.12.4.min.js"></script>
   <script src="./js/template-web.js"></script>
-  <script type="text/html" id="articletpl">
 
+  <script type="text/html" id="articletpl">
     <div class="left_con setfr">
-      
       <div class="breadcrumb">
         当前位置： <a href="index.html">首页</a> &gt; <a href="#">{{category}}</a> &gt; 文章详情
       </div>
@@ -173,26 +198,44 @@
      
       
       <div class="article_links">
-    上一篇： <a href="article.html?id={{prev.id}}">{{prev.title}}</a><br>
-    下一篇： <a href="article.html?id={{prev.id}}">{{next.title}}</a>
+        上一篇： <a href="article.html?id={{prev.id}}">{{prev.title}}</a><br>
+        下一篇： <a href="article.html?id={{next.id}}">{{next.title}}</a>
       </div>
-     
   </script>
 
-  <!-- list模板 -->
-  <script type='text/html' id='listTpl'>
+  <script type="text/html" id="informationtpl">
     {{each data}}
-    <div class="comment_detail_list">
-      <div class="person_pic fl">{{$value.author.substr(0,1)}}</div>
-      <div class="name_time fl"><b>{{$value.author}}</b><span>{{$imports.getTime($value.date,$value.time)}}前</span></div>
-      <div class="comment_text fl">
-        {{$value.content}}
+    <div class="common_news_list">
+      <a href="article.html?id{{$value.id}}" class="list_pic"><img src="{{$value.cover}}" alt=""></a>
+      <h4><a href="article.html?id={{$value.id}}">{{$value.intro}}</a></h4>
+      <p>{{$value.content}}</p>
+      <div class="new_info">
+        <span>标签：{{$value.category}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;阅读({{$value.read}}
+          )&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting"></i>&nbsp;评论({{$value.comments}} )</span>
+        <b>发布于 {{$value.date}}</b>
       </div>
     </div>
     {{/each}}
   </script>
 
+  <!-- list模板 -->
+  <script type="text/html" id="listTpl">
+    {{each data}}
+    <div class="comment_detail_list">
+          <div class="person_pic fl">{{$value.author.substr(0,1)}}</div>
+          <div class="name_time fl"><b>{{$value.author}}</b><span></span></div>
+          <div class="comment_text fl">
+            {{$value.content}}
+          </div>
+        </div>
+        {{/each}}
+  </script>
+    
+
+    
+
   <!-- 文章页面的 js 代码  -->
+  <script src="./js/index.js"></script>
   <script src="./js/article.js"></script>
 
 
