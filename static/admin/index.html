@@ -205,6 +205,27 @@
 
 
     });
+
+<script>
+
+    // 加载用户头像与 名字
+    function loadInfo() {
+      $.ajax({
+        url: 'http://localhost:8080/api/v1/admin/user/info',
+        type: 'get',
+        dataType: 'json',
+        data: '',
+        success: function (data) {
+          // console.log(data);
+          if (data.code == 200) {
+            $('.user_info>img').attr('src', data.data.userPic);
+            $('.user_center_link>img').attr('src', data.data.userPic);
+            $('.user_info>span').html('欢迎&nbsp-&nbsp' + data.data.nickname);
+          }
+        }
+      });
+    }
+
   </script>
 </body>
 

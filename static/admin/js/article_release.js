@@ -18,7 +18,7 @@ $('#exampleInputFile').on('change', function () {
     var file = this.files[0]
     var imgURL = URL.createObjectURL(file)
     $('#preview').prop('src', imgURL);
-
+    // $('#example1').val(imgURL)
 })
 
 //给发布按钮添加点击事件
@@ -36,6 +36,7 @@ $('#publish').on('click', function () {
     formData.append('categoryId', $('#article_category').find('option:selected').attr('data-id'));
     formData.append('content', tinyMCE.activeEditor.getContent().replace(/<[^<>]+>/g, ''));
     formData.append('state', $("#publish").val());
+
     $.ajax({
         type: 'post',
         url: 'http://localhost:8080/api/v1/admin/article/publish',
@@ -46,10 +47,7 @@ $('#publish').on('click', function () {
             console.log(result);
             console.log('成功发布');
             location.href = '/admin/article_list.html'
-
-
         }
-
     })
     return false;
 })
