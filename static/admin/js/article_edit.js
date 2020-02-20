@@ -19,13 +19,8 @@ $.ajax({
                     $("#modifyBox").html(html);
                 }
             })
-
-
         }
-
     }
-
-
 })
 //文件上传
 $('#modifyBox').on('change', '#exampleInputFile', function () {
@@ -41,7 +36,6 @@ $('#modifyBox').on('change', '#exampleInputFile', function () {
 
 //表单提交
 $('#modifyBox').on('submit', '#modifyForm', function () {
-    //获取用户选择的文件
     let formData = new FormData();
     formData.append("id", $("#id").val());
     formData.append("title", $("#inputEmail3").val());
@@ -49,8 +43,6 @@ $('#modifyBox').on('submit', '#modifyForm', function () {
     formData.append("date", $("#dateinput").val());
     formData.append("content", $("#rich_content").val());
     formData.append("cover", $("#exampleInputFile")[0].files[0]);
-
-
     $.ajax({
         type: 'post',
         url: 'http://localhost:8080/api/v1/admin/article/edit',
@@ -68,7 +60,6 @@ $('#modifyBox').on('submit', '#modifyForm', function () {
     })
     return false;
 })
-
 
 // 封装一个函数，用于从浏览器的地址栏中获取指定的参数
 function getUrlParams(name) {

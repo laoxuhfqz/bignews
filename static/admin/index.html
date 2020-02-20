@@ -90,9 +90,9 @@
   <div class="header_bar">
     <form class="search_form">
 
-		<input type="text" placeholder="请输入搜索内容" id="search">
+      <input type="text" placeholder="请输入搜索内容" id="search">
       <i class="iconfont icon-search" id="icon-search"></i>
-</form>
+    </form>
 
     <div class="user_center_link">
       <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
@@ -194,7 +194,7 @@
       })
     })
 
- //搜索功能
+    //搜索功能
     $("#icon-search").on("click", function () {
       var search = $("#search").val();
       if (search.trim() == "") {
@@ -203,9 +203,9 @@
       }
       $('iframe').prop('src', 'article_list.html?key=' + search);
 
-      // $("#search").val("");
+
     });
- </script>
+  </script>
 </body>
 
 </html>

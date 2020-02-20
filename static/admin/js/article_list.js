@@ -5,7 +5,6 @@ if (key == '-1') {
     key = null;
 } else {
     //否则就是搜索文章  url参数被编码  需要解码获取真实参数
-    //将所有文章查询接口都加上  key 条件
     key = decodeURI(key);
 }
 //获取文章列表数据
@@ -70,8 +69,6 @@ $('#formBox').on('submit', function () {
     if (key != '-1') {
         obj.key = key;
     }
-
-
     $.ajax({
         type: 'get',
         url: 'http://localhost:8080/api/v1/admin/article/query',
